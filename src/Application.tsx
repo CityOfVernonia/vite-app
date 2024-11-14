@@ -1,5 +1,5 @@
 import esri = __esri;
-import { subclass } from '@arcgis/core/core/accessorSupport/decorators';
+import { subclass, property } from '@arcgis/core/core/accessorSupport/decorators';
 import Widget from '@arcgis/core/widgets/Widget';
 import { tsx } from '@arcgis/core/widgets/support/widget';
 
@@ -19,7 +19,22 @@ export default class Application extends Widget {
     document.body.appendChild(this.container);
   }
 
+  @property()
+  private _activePanel: 'home' | 'info' | null = 'home';
+
+  private _showPanel(panel: 'home' | 'info'): void {
+    const { _activePanel } = this;
+
+    if (_activePanel === panel) {
+      this._activePanel = null;
+    } else {
+      this._activePanel = panel;
+    }
+  }
+
   render(): tsx.JSX.Element {
+    const { _activePanel } = this;
+
     return (
       <calcite-shell>
         {/* header */}
@@ -29,14 +44,30 @@ export default class Application extends Widget {
             <div>vite-app</div>
           </div>
         </div>
-        {/* start shell panel */}
-        <calcite-shell-panel position="start" slot="panel-start">
+        {/* shell panel */}
+        <calcite-shell-panel collapsed={_activePanel === null} position="start" slot="panel-start">
+          {/* action bar */}
           <calcite-action-bar slot="action-bar">
-            <calcite-action active="" icon="home" text="Home">
-              <calcite-tooltip slot="tooltip">Home</calcite-tooltip>
+            <calcite-action
+              active={_activePanel === 'home'}
+              icon="home"
+              text="Home"
+              onclick={this._showPanel.bind(this, 'home')}
+            >
+              <calcite-tooltip close-on-click="" slot="tooltip">Home</calcite-tooltip>
+            </calcite-action>
+            <calcite-action
+              active={_activePanel === 'info'}
+              icon="information"
+              text="Info"
+              onclick={this._showPanel.bind(this, 'info')}
+            >
+              <calcite-tooltip close-on-click="" slot="tooltip">Info</calcite-tooltip>
             </calcite-action>
           </calcite-action-bar>
-          <calcite-panel heading="Home">
+
+          {/* panels */}
+          <calcite-panel heading="Home" hidden={_activePanel !== 'home'}>
             <calcite-block open="">
               <calcite-notice icon="home" open="">
                 <div slot="title">Hi</div>
@@ -44,7 +75,17 @@ export default class Application extends Widget {
               </calcite-notice>
             </calcite-block>
           </calcite-panel>
+
+          <calcite-panel heading="Info" hidden={_activePanel !== 'info'}>
+            <calcite-block open="">
+              <calcite-notice icon="information" open="">
+                <div slot="title">Hello</div>
+                <div slot="message">This is another message</div>
+              </calcite-notice>
+            </calcite-block>
+          </calcite-panel>
         </calcite-shell-panel>
+
         {/* content */}
         <div style="padding: 0.75rem;">Some interesting content</div>
       </calcite-shell>
