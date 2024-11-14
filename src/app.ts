@@ -1,15 +1,28 @@
 import '@esri/calcite-components/dist/calcite/calcite.css';
 import './main.scss';
+import './components/Loading.scss';
 import './Application.scss';
 
-// calcite assets
-import { defineCustomElements } from '@esri/calcite-components/dist/loader';
-defineCustomElements(window, { resourcesUrl: './calcite/assets' });
-
-import Application from './Application';
-
 const load = async (): Promise<void> => {
-  new Application();
+  // calcite assets
+  const defineCustomElements = (await import('@esri/calcite-components/dist/loader')).defineCustomElements;
+  defineCustomElements(window, { resourcesUrl: './calcite/assets' });
+
+  // modules
+  const Loading = (await import('./components/Loading')).default;
+  const Application = (await import('./Application')).default;
+
+  const title = 'Hello World!';
+
+  const loading = new Loading({
+    title,
+  });
+
+  new Application({
+    title,
+  });
+
+  loading.end();
 };
 
 load();

@@ -14,10 +14,12 @@ const CSS = {
 export default class Application extends Widget {
   container = document.createElement('calcite-shell');
 
-  constructor(properties?: esri.WidgetProperties) {
+  constructor(properties?: esri.WidgetProperties & { title: string }) {
     super(properties);
     document.body.appendChild(this.container);
   }
+
+  title = 'vite-app';
 
   @property()
   private _activePanel: 'home' | 'info' | null = 'home';
@@ -33,7 +35,7 @@ export default class Application extends Widget {
   }
 
   render(): tsx.JSX.Element {
-    const { _activePanel } = this;
+    const { _activePanel, title } = this;
 
     return (
       <calcite-shell>
@@ -41,9 +43,10 @@ export default class Application extends Widget {
         <div class={CSS.header} slot="header">
           <div class={CSS.headerTitle}>
             <img src={logoSvg}></img>
-            <div>vite-app</div>
+            <div>{title}</div>
           </div>
         </div>
+
         {/* shell panel */}
         <calcite-shell-panel collapsed={_activePanel === null} position="start" slot="panel-start">
           {/* action bar */}
@@ -54,7 +57,9 @@ export default class Application extends Widget {
               text="Home"
               onclick={this._showPanel.bind(this, 'home')}
             >
-              <calcite-tooltip close-on-click="" slot="tooltip">Home</calcite-tooltip>
+              <calcite-tooltip close-on-click="" slot="tooltip">
+                Home
+              </calcite-tooltip>
             </calcite-action>
             <calcite-action
               active={_activePanel === 'info'}
@@ -62,7 +67,9 @@ export default class Application extends Widget {
               text="Info"
               onclick={this._showPanel.bind(this, 'info')}
             >
-              <calcite-tooltip close-on-click="" slot="tooltip">Info</calcite-tooltip>
+              <calcite-tooltip close-on-click="" slot="tooltip">
+                Info
+              </calcite-tooltip>
             </calcite-action>
           </calcite-action-bar>
 
