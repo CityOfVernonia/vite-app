@@ -1,5 +1,3 @@
-// @use "sass:color";
-@use "./scss/header" as *;
 @use "./scss/variables" as *;
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -30,38 +28,4 @@ body {
   padding: 0;
   margin: 0;
   font-family: $font-family;
-}
-
-.application-header {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 38px;
-  padding: 0.5rem 1rem;
-  background: url(#{$header-background}), center, center,
-    linear-gradient(90deg, rgba($brand-dark, 1) 0%, rgba($brand, 1) 100%);
-  color: white;
-}
-
-.application-header_title {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  gap: 1rem;
-  user-select: none;
-
-  img {
-    height: 2.25rem;
-  }
-
-  div {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 650px) {
-  .application-header_title div {
-    display: none;
-  }
 }

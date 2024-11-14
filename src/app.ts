@@ -1,5 +1,6 @@
 import '@esri/calcite-components/dist/calcite/calcite.css';
 import './main.scss';
+import './Application.scss';
 
 // calcite assets
 import { defineCustomElements } from '@esri/calcite-components/dist/loader';
