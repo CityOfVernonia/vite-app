@@ -49,9 +49,7 @@ export default class Loading extends Widget {
         <img class={CSS.logo} src={logoSvg}></img>
 
         <div class={CSS.info}>
-          <div>
-            Copyright &copy; {new Date().getFullYear()} City of Vernonia
-          </div>
+          <div>Copyright &copy; {new Date().getFullYear()} City of Vernonia</div>
           <div>
             <span>Made with</span>
             <svg
