@@ -1,5 +1,5 @@
-@use "./scss/header" as *;
-@use "./scss/variables" as *;
+@use "./../scss/header" as header;
+@use "./../scss/variables" as vars;
 
 .application-header {
   display: flex;
@@ -8,8 +8,8 @@
   justify-content: space-between;
   min-height: 38px;
   padding: 0.5rem 1rem;
-  background: url(#{$header-background}), center, center,
-    linear-gradient(90deg, rgba($brand-dark, 1) 0%, rgba($brand, 1) 100%);
+  background: url(#{header.$header-background}), center, center,
+    linear-gradient(90deg, rgba(vars.$brand-dark, 1) 0%, rgba(vars.$brand, 1) 100%);
   color: white;
 }
 

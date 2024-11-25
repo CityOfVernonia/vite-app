@@ -1,4 +1,4 @@
-@use "./scss/variables" as *;
+@use "./scss/variables" as vars;
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // font
@@ -11,14 +11,14 @@
 :root,
 .calcite-mode-light,
 * .calcite-mode-light {
-  --calcite-color-brand: #{$brand};
-  --calcite-color-brand-dark: #{$brand-dark}; // custom vernonia color var
-  --calcite-color-off-white: #{$brand-off-white}; // custom vernonia color var
-  --calcite-color-brand-hover: #{$brand-hover};
-  --calcite-color-brand-press: #{$brand-press};
-  --calcite-color-brand-underline: #{$link-underline};
-  --calcite-sans-family: #{$font-family};
-  --calcite-color-text-link: #{$brand-hover};
+  --calcite-color-brand: #{vars.$brand};
+  --calcite-color-brand-dark: #{vars.$brand-dark}; // custom vernonia color var
+  --calcite-color-off-white: #{vars.$brand-off-white}; // custom vernonia color var
+  --calcite-color-brand-hover: #{vars.$brand-hover};
+  --calcite-color-brand-press: #{vars.$brand-press};
+  --calcite-color-brand-underline: #{vars.$link-underline};
+  --calcite-sans-family: #{vars.$font-family};
+  --calcite-color-text-link: #{vars.$brand-hover};
 }
 
 html,
@@ -27,5 +27,5 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: $font-family;
+  font-family: vars.$font-family;
 }

@@ -1,0 +1,107 @@
+/**
+ * the minimum css for maps, ui, attribution widget and popup widget
+ */
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// vernonia variables
+/////////////////////////////////////////////////////////////////////////////////////////
+@use "./variables" as vars;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// arcgis variables
+/////////////////////////////////////////////////////////////////////////////////////////
+@use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_color.scss" as *;
+// @use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_functions.scss" as *;
+// @use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_layout.scss" as *;
+@use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_mixins.scss" as *;
+@use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_sizes.scss" as *;
+@use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_type.scss" as *;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// must set/override until arcgis is completely modular
+/////////////////////////////////////////////////////////////////////////////////////////
+$brand: #6b9560;
+$font-family: "Roboto", sans-serif;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// arcgis view and ui
+/////////////////////////////////////////////////////////////////////////////////////////
+// @use "./../../node_modules/@arcgis/core/assets/esri/themes/base/_View.scss" with (
+//   $font-family: vars.$font-family
+// );
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/_View.scss";
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/_Overlay.scss";
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/_OverlayItem.scss";
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/_Ui.scss";
+
+.esri-view .esri-view-surface::after {
+  outline: none !important;
+  outline-offset: 0;
+}
+
+// tighten up ui
+.esri-ui-top-right {
+  top: -5px;
+  right: -5px;
+}
+
+.esri-ui-top-left {
+  top: -5px;
+  left: -5px;
+}
+
+.esri-ui-bottom-left {
+  bottom: -5px;
+  left: -5px;
+}
+
+.esri-ui-bottom-right {
+  bottom: -5px;
+  right: -5px;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// arcgis widgets
+/////////////////////////////////////////////////////////////////////////////////////////
+$include_Attribution: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/Attribution.scss";
+
+$include_Popup: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/Popup.scss";
+
+.esri-widget__heading.esri-features__heading {
+  color: $font-color;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+$include_Feature: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/Feature.scss";
+
+.esri-widget__table {
+  background-color: transparent;
+}
+
+.esri-widget__table tr th {
+  border-right: 3px solid rgba(vars.$brand, 0.125);
+}
+
+.esri-widget__table tr:nth-child(odd) {
+  background-color: rgba(vars.$brand, 0.05);
+}
+
+.esri-widget__table tr:nth-child(even) {
+  background-color: rgba($color: #ffffff, $alpha: 0) !important;
+}
+
+$include_FeatureContent: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/FeatureContent.scss";
+
+$include_FeatureForm: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/FeatureForm.scss";
+
+$include_FeatureMedia: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/FeatureMedia.scss";
+
+$include_Features: true;
+@import "./../../node_modules/@arcgis/core/assets/esri/themes/base/widgets/Features.scss";

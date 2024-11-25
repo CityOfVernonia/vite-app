@@ -5,6 +5,23 @@ import chalk from 'chalk';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 (async () => {
+  // copy arcgis core assets
+  const arcgisSrc = path.resolve(__dirname, './../node_modules/@arcgis/core/assets');
+  const arcgisDest = path.resolve(__dirname, './../src/public/arcgis');
+  if (!arcgisSrc) {
+    console.log(chalk.red.bold('@argis/core must be installed'));
+    return;
+  }
+  if (arcgisDest) {
+    await fs.remove(arcgisDest);
+  }
+  await fs.ensureDir(arcgisDest);
+  await fs.copy(arcgisSrc, arcgisDest);
+  // delete unnecessary arcgis assets
+  await fs.remove(path.resolve(__dirname, './../src/public/arcgis/esri/css'));
+  await fs.remove(path.resolve(__dirname, './../src/public/arcgis/esri/themes'));
+  console.log(chalk.green('@argis/core assets copied'));
+
   // copy calcite components
   const calciteSrc = path.resolve(__dirname, './../node_modules/@esri/calcite-components/dist/calcite/assets');
   // cannot be flat directory must be `calcite/assets`
